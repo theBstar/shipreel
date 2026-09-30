@@ -1,6 +1,6 @@
 # shipreel
 
-**Turn a pull request into a short narrated walkthrough video.** An agent skill: your coding agent reads the diff, writes the story, draws the diagrams, records the real app if the change has a UI, and renders an MP4 under three minutes, with captions, crossfade cuts and an ambient music bed.
+**Turn a pull request into a short narrated walkthrough video.** An agent skill: your coding agent reads the diff, writes the story, draws the diagrams, records the real app if the change has a UI, and renders a compact MP4, about two and a half minutes by default, with captions, crossfade cuts and an ambient music bed.
 
 Reviewers watch the change instead of reverse-engineering it.
 
@@ -45,7 +45,7 @@ instructions: |
   Audience: engineers reviewing the PR. Lead with what changes for the user.
 
 video:
-  max_seconds: 120
+  optimal_seconds: 120     # a guideline; the default is 150
 
 voice:                     # macOS `say` by default; Piper or any command elsewhere
   engine: piper

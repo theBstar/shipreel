@@ -5,7 +5,7 @@ import path from 'node:path';
 import YAML from 'yaml';
 
 export const DEFAULTS = {
-  video: { max_seconds: 180, fps: 24, crossfade: 0.6, music: 'pad', music_volume: 0.55, max_mb: 9.5 },
+  video: { optimal_seconds: 150, fps: 24, crossfade: 0.6, music: 'pad', music_volume: 0.55, max_mb: 9.5 },
   voice: { engine: 'auto', say: { voice: 'Samantha', rate: 178 } },
   browser: { path: 'auto' },
   fonts: {

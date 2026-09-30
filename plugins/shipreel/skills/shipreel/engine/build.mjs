@@ -2,12 +2,11 @@
 // Render a scenes file to an MP4.
 //
 //   node build.mjs --scenes <file.mjs> [--out <dir>] [--config <shipreel.yml>]
-//                  [--timing] [--stills] [--only 0,2] [--conc 3] [--force]
+//                  [--timing] [--stills] [--only 0,2] [--conc 3]
 //
 // --timing  print scene lengths and beat times, render nothing
 // --stills  render one PNG per beat (plus the end frame) to check layouts
 // --only    render just these scenes (no final cut)
-// --force   allow a video longer than video.max_seconds
 //
 // Pipeline: narration per beat (voice adapter) → frames from headless Chrome
 // (one screenshot per frame, deterministic) → per-scene video → crossfade cut →
@@ -66,10 +65,10 @@ const timing = scenes.map((sc, si) => {
 const total = timing.reduce((a, b) => a + b.dur, 0) - XF * (scenes.length - 1);
 console.log(`${NAME}: ${total.toFixed(1)} s | ${timing.map(x => x.dur.toFixed(0)).join(' ')}`);
 if (flag('--timing')) { timing.forEach((x, i) => console.log(i, scenes[i].title, '|', x.beats.map(b => b.toFixed(1)).join(' '))); process.exit(0); }
-if (total > +V.max_seconds && !flag('--force')) {
-  console.error(`Too long: ${total.toFixed(0)} s is over video.max_seconds (${V.max_seconds}). Tighten the narration, or pass --force.`);
-  process.exit(3);
-}
+// video.optimal_seconds is a guideline, not a limit: attention drops past two or three
+// minutes, so a longer video should be the exception the change really needs.
+const over = total - +V.optimal_seconds;
+if (over > 0) console.log(`Note: ${over.toFixed(0)} s over the optimal length (${V.optimal_seconds} s). Tighten the narration unless the change needs the time.`);
 
 // 2. the page: every scene on one stage, shown one at a time by engine.js
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>${css(cfg.fonts)}</style></head><body>

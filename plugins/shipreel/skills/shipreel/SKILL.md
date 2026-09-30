@@ -1,11 +1,11 @@
 ---
 name: shipreel
-description: Turn a pull request into a short narrated walkthrough video (under 3 minutes) with animated diagrams, code panels, optional screen recordings of the real app, captions, crossfade cuts and an ambient music bed. Runs locally with no paid services by default. Use when asked for a PR video, PR walkthrough, demo video of a change, or "make a shipreel".
+description: Turn a pull request into a short narrated walkthrough video (about two and a half minutes) with animated diagrams, code panels, optional screen recordings of the real app, captions, crossfade cuts and an ambient music bed. Runs locally with no paid services by default. Use when asked for a PR video, PR walkthrough, demo video of a change, or "make a shipreel".
 ---
 
 # shipreel: a walkthrough video for a pull request
 
-Make a video a reviewer can watch instead of reading the diff cold: what changed, why, and how it works, in at most `video.max_seconds` (default 180). Diagrams and code for back-end work; real screen recordings for anything with a UI.
+Make a video a reviewer can watch instead of reading the diff cold: what changed, why, and how it works. Aim for `video.optimal_seconds` (default 150). It is a guideline, not a limit: attention drops off past two or three minutes, so go longer only when the change truly needs it, and shorter whenever it can. Compact and descriptive beats complete. Diagrams and code for back-end work; real screen recordings for anything with a UI.
 
 `ENGINE` below is the `engine/` directory next to this file. Run engine commands from the user's repository so `shipreel.yml` is found.
 
@@ -41,7 +41,7 @@ Skip generated and vendored files (lockfiles, generated clients, snapshots, buil
 
 ## 3. Plan the story
 
-Pick 4–7 scenes: an intro, one scene per idea, and a close that says where to look when reviewing (and anything the reviewer should double-check). Budget the narration to the length limit: at the default voice, speech runs about 2.9 words a second, so 180 seconds is roughly 420 words across all scenes, including pauses. Write for the ear: short sentences, one idea each, present tense.
+Pick 4–7 scenes: an intro, one scene per idea, and a close that says where to look when reviewing (and anything the reviewer should double-check). Budget the narration to the optimal length: at the default voice, speech runs about 2.9 words a second, so 150 seconds is roughly 350 words across all scenes, including pauses. A small PR deserves a short video; don't fill the time. Write for the ear: short sentences, one idea each, present tense.
 
 Read `references/narration.md` for the style, and `references/scenes.md` for what a scene can show.
 
@@ -67,12 +67,12 @@ Needs `app.url` in `shipreel.yml` (and `app.login` if the app needs a sign-in). 
 ## 6. Check, then render
 
 ```bash
-node "$ENGINE/build.mjs" --scenes <scenes.mjs> --timing   # must fit video.max_seconds
+node "$ENGINE/build.mjs" --scenes <scenes.mjs> --timing   # aim for video.optimal_seconds
 node "$ENGINE/build.mjs" --scenes <scenes.mjs> --stills   # one PNG per line: look at them
 node "$ENGINE/build.mjs" --scenes <scenes.mjs>            # the MP4, ~5–10 minutes
 ```
 
-Over the limit? Tighten the narration; do not speed the voice up. Look at the stills (a contact sheet with ffmpeg `hstack`/`vstack` is quickest): overlapping text, empty halves of the screen, a clip showing the wrong moment for its line. For clip scenes, line the narration up with what is on screen using the scene's `gap` (extra seconds after a line) and `minDur`.
+Over the optimal length? Cut what the reviewer doesn't need before going over; never speed the voice up. If the change really needs longer, say so to the user. Look at the stills (a contact sheet with ffmpeg `hstack`/`vstack` is quickest): overlapping text, empty halves of the screen, a clip showing the wrong moment for its line. For clip scenes, line the narration up with what is on screen using the scene's `gap` (extra seconds after a line) and `minDur`.
 
 ## 7. Deliver
 

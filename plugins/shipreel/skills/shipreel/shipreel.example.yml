@@ -6,7 +6,7 @@ instructions: |
   Lead with what changes for the user, then how it works.
 
 video:
-  max_seconds: 180
+  optimal_seconds: 150   # a guideline: go longer only when the change needs it
 
 # voice:
 #   engine: piper
