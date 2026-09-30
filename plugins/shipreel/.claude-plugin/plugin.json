@@ -1,10 +1,24 @@
 {
   "name": "shipreel",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Turn a pull request into a short narrated walkthrough video: diagrams, code, real screen recordings, captions and music. Local and free by default.",
-  "author": { "name": "theBstar" },
+  "author": {
+    "name": "theBstar"
+  },
   "homepage": "https://github.com/theBstar/shipreel",
   "repository": "https://github.com/theBstar/shipreel",
   "license": "MIT",
-  "keywords": ["pull-request", "video", "walkthrough", "code-review", "demo"]
+  "keywords": [
+    "pull-request",
+    "pr",
+    "video",
+    "walkthrough",
+    "code-review",
+    "demo",
+    "narration",
+    "screen-recording",
+    "changelog",
+    "developer-tools"
+  ],
+  "displayName": "shipreel"
 }

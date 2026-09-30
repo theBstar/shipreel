@@ -1,0 +1,23 @@
+# shipreel
+
+> An agent skill that turns a GitHub pull request into a short narrated walkthrough video (about 150 seconds): animated diagrams, code panels, optional screen recordings of the real app, captions, crossfade cuts and an ambient music bed. Free and local by default (macOS `say` or Piper for the voice, headless Chrome and ffmpeg for rendering); zero setup on a Mac. Works with Claude Code, Codex, Cursor and any agent that reads SKILL.md skills.
+
+Install: `npx skills add theBstar/shipreel`, or in Claude Code `/plugin marketplace add theBstar/shipreel` then `/plugin install shipreel@shipreel`. Then ask the agent to "make a shipreel for PR 123".
+
+## Skill
+
+- [SKILL.md](https://github.com/theBstar/shipreel/blob/main/plugins/shipreel/skills/shipreel/SKILL.md): the workflow an agent follows, from reading the PR to delivering the MP4
+- [Scenes](https://github.com/theBstar/shipreel/blob/main/plugins/shipreel/skills/shipreel/references/scenes.md): the scene format and helpers (boxes, arrows, cards, code diffs, screen recordings)
+- [Narration](https://github.com/theBstar/shipreel/blob/main/plugins/shipreel/skills/shipreel/references/narration.md): how to write the script, length and pronunciation
+- [Recording](https://github.com/theBstar/shipreel/blob/main/plugins/shipreel/skills/shipreel/references/recording.md): signing in and recording the real app
+- [Config](https://github.com/theBstar/shipreel/blob/main/plugins/shipreel/skills/shipreel/references/config.md): every `shipreel.yml` key
+
+## Examples
+
+- [Its own PR #1](https://github.com/theBstar/shipreel/tree/main/examples/pr-1): a 50-second video with its scenes file
+- [hello](https://github.com/theBstar/shipreel/tree/main/examples/hello): a minimal three-scene example
+
+## Optional
+
+- [README](https://github.com/theBstar/shipreel/blob/main/README.md)
+- [Engine](https://github.com/theBstar/shipreel/tree/main/plugins/shipreel/skills/shipreel/engine): build.mjs (render), record.mjs (screen recordings), doctor.mjs (checks the machine)
