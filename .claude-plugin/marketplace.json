@@ -1,0 +1,16 @@
+{
+  "name": "shipreel",
+  "owner": {
+    "name": "theBstar"
+  },
+  "metadata": {
+    "description": "Narrated walkthrough videos for pull requests."
+  },
+  "plugins": [
+    {
+      "name": "shipreel",
+      "source": "./plugins/shipreel",
+      "description": "Turn a pull request into a short narrated walkthrough video: diagrams, code, real screen recordings, captions and music. Local and free by default."
+    }
+  ]
+}

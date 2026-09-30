@@ -1,0 +1,6 @@
+node_modules/
+.shipreel/
+out/
+examples/*/clips/*/
+*.aiff
+.DS_Store

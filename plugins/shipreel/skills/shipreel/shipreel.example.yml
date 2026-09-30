@@ -1,0 +1,31 @@
+# Copy to the root of your repository as shipreel.yml. Everything is optional;
+# see references/config.md for every key.
+
+instructions: |
+  Audience: engineers reviewing the PR.
+  Lead with what changes for the user, then how it works.
+
+video:
+  max_seconds: 180
+
+# voice:
+#   engine: piper
+#   piper:
+#     model: ./voices/en_US-lessac-medium.onnx
+
+# app:
+#   url: http://localhost:3000
+#   login:
+#     path: /login
+#     steps:
+#       - fill: 'input[type=email]'
+#         with: username
+#       - fill: 'input[type=password]'
+#         with: password
+#       - click: 'button[type=submit]'
+#   credentials:
+#     username: { env: SHIPREEL_DEMO_USER }
+#     password: { env: SHIPREEL_DEMO_PASSWORD }
+
+# pronounce:
+#   kubectl: cube control

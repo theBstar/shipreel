@@ -1,0 +1,16 @@
+{
+  "name": "shipreel-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Renders shipreel scenes to a narrated MP4.",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "doctor": "node doctor.mjs",
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.11.1",
+    "yaml": "^2.6.1"
+  }
+}

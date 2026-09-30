@@ -1,0 +1,41 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  render:
+    # macOS: Chrome and the `say` voice are already there, the zero-config path users get.
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: brew install ffmpeg
+      - run: npm install --prefix plugins/shipreel/skills/shipreel/engine
+      - run: node plugins/shipreel/skills/shipreel/engine/doctor.mjs
+      - run: node plugins/shipreel/skills/shipreel/engine/build.mjs --scenes examples/hello/scenes.mjs --timing
+      - run: node plugins/shipreel/skills/shipreel/engine/build.mjs --scenes examples/hello/scenes.mjs --stills
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stills
+          path: examples/hello/out/still_*.png
+
+  denylist:
+    # Terms that must never appear in this repository, kept in a secret so the
+    # list itself is not published. Checks the tree and every commit message.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - env:
+          DENYLIST: ${{ secrets.DENYLIST }}
+        run: |
+          if [ -z "$DENYLIST" ]; then echo "DENYLIST secret not set; skipping"; exit 0; fi
+          if git grep -I -i -n -E "$DENYLIST" -- . ; then echo "denylisted term in the tree"; exit 1; fi
+          if git log --all --format='%H %an %ae %s %b' | grep -i -E "$DENYLIST"; then echo "denylisted term in history"; exit 1; fi
+          echo "clean"
