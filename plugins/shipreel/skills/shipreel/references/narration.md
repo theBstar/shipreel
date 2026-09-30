@@ -13,7 +13,7 @@ The narration is the video; the screen supports it. Write it first, then decide 
 
 ## Length
 
-At the default voice (macOS Samantha, rate 178) speech runs about 2.9 words a second. With pauses between lines and scenes, 180 seconds holds roughly 420 words. `build.mjs --timing` gives the real number; it refuses to render over `video.max_seconds` unless you pass `--force`.
+Aim for `video.optimal_seconds` (default 150). People lose interest past two or three minutes, so treat it as the target: shorter for small changes, longer only when the change really needs it. At the default voice (macOS Samantha, rate 178) speech runs about 2.9 words a second; with pauses between lines and scenes, 150 seconds holds roughly 350 words. `build.mjs --timing` gives the real number and notes when a video runs over.
 
 ## Pronunciation
 

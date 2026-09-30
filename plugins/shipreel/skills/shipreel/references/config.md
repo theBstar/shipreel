@@ -9,7 +9,7 @@ instructions: |
   Keep it under two minutes for small PRs.
 
 video:
-  max_seconds: 180        # refuses to render longer (build.mjs --force overrides)
+  optimal_seconds: 150    # the length to aim for; a guideline, not a limit (a note is printed when over)
   fps: 24
   crossfade: 0.6          # seconds, between scenes
   music: pad              # pad (synthesized, royalty-free) | none | path/to/track.mp3
