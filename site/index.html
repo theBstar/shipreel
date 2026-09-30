@@ -11,6 +11,9 @@
 <meta property="og:image" content="media/poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
+<!-- Google Analytics 4: the same property as www.thebstar.com, so visits show up there under /shipreel/. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6K53Q5XBV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6K53Q5XBV4');</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1020'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%235b9dff' stroke-width='4'/%3E%3Cpath d='M27 23 L42 32 L27 41 Z' fill='%2322d3ee'/%3E%3C/svg%3E">
 <style>
 :root{--bg:#0b1020;--panel:#121a31;--panel2:#0d1426;--line:#26335a;--fg:#e8ecf5;--muted:#aeb7cb;--dim:#7c8aa8;
@@ -190,6 +193,20 @@ for (const [t, name] of CH) {
 document.querySelectorAll('button.copy').forEach(b => b.onclick = async () => {
   try { await navigator.clipboard.writeText(document.getElementById(b.dataset.copy).textContent); b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy', 1500); } catch {}
 });
+// Analytics events (GA4 counts page views itself; these are what it can't see).
+const track = (name, params = {}) => { if (typeof gtag === 'function') gtag('event', name, params); };
+const vp = { video_title: 'shipreel explainer' };
+let started = false; const marks = new Set();
+v.addEventListener('play', () => { if (!started) { started = true; track('video_start', vp); } });
+v.addEventListener('timeupdate', () => {
+  if (!v.duration) return;
+  for (const pct of [25, 50, 75]) if (!marks.has(pct) && v.currentTime / v.duration >= pct / 100) { marks.add(pct); track('video_progress', { ...vp, video_percent: pct }); }
+});
+v.addEventListener('ended', () => track('video_complete', vp));
+ch.addEventListener('click', e => { const b = e.target.closest('button'); if (b) track('video_chapter', { ...vp, chapter: b.textContent.replace(/^\d\d:\d\d/, '') }); });
+document.querySelectorAll('button.copy').forEach(b => b.addEventListener('click', () => track('install_copy', { method: 'npx skills' })));
+document.querySelectorAll('a[href^="https://github.com"]').forEach(a => a.addEventListener('click', () => track('github_click', { link_url: a.href })));
+document.querySelectorAll('[role=tab]').forEach(t => t.addEventListener('click', () => track('install_tab', { method: t.textContent })));
 document.querySelectorAll('[role=tab]').forEach(t => t.onclick = () => {
   document.querySelectorAll('[role=tab]').forEach(x => x.setAttribute('aria-selected', x === t));
   document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', p.id === t.dataset.pane));

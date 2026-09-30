@@ -1,0 +1,10 @@
+import puppeteer from 'puppeteer-core';
+const browser = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true, args: ['--autoplay-policy=no-user-gesture-required'] });
+const p = await browser.newPage(); await p.setRequestInterception(true);
+p.on('request', r => /collect/.test(r.url()) ? r.abort() : r.continue());
+await p.goto('http://localhost:8766/', { waitUntil: 'networkidle0' });
+const r = await p.evaluate(async () => { const v = document.getElementById('v'); v.muted = true; await v.play();
+  const a = { dur: v.duration, t0: v.currentTime };
+  v.currentTime = v.duration * 0.8; await new Promise(r => setTimeout(r, 2500));
+  return { ...a, t1: v.currentTime, paused: v.paused, ev: window.dataLayer.filter(e => e[0] === 'event').map(e => e[1] + (e[2]?.video_percent ? ':' + e[2].video_percent : '')) }; });
+console.log(JSON.stringify(r)); await browser.close();
