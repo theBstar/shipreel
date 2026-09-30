@@ -10,7 +10,15 @@
     {
       "name": "shipreel",
       "source": "./plugins/shipreel",
-      "description": "Turn a pull request into a short narrated walkthrough video: diagrams, code, real screen recordings, captions and music. Local and free by default."
+      "description": "Turn a pull request into a short narrated walkthrough video: diagrams, code, real screen recordings, captions and music. Local and free by default.",
+      "category": "productivity",
+      "tags": [
+        "pull-request",
+        "video",
+        "code-review",
+        "walkthrough",
+        "demo"
+      ]
     }
   ]
 }

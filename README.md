@@ -30,6 +30,8 @@ npx skills add theBstar/shipreel
 
 **By hand:** copy `plugins/shipreel/skills/shipreel/` into your agent's skills directory (for Claude Code, `~/.claude/skills/shipreel/`).
 
+**Agents:** start from [`llms.txt`](llms.txt); contributors' agents, from [`AGENTS.md`](AGENTS.md).
+
 Needs Node 18+, ffmpeg (`brew install ffmpeg`) and Chrome, Chromium, Edge or Brave.
 
 ## Use
