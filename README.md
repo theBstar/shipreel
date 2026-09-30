@@ -4,9 +4,21 @@
 
 Reviewers watch the change instead of reverse-engineering it.
 
-[![The walkthrough shipreel made for its own PR #1](examples/pr-1/preview.gif)](examples/pr-1/shipreel-pr-1.mp4)
+[![shipreel in under two minutes: what it is, how to use it, how it works and how to customise it](examples/explainer/preview.gif)](examples/explainer/shipreel.mp4)
 
-*The video shipreel made for its own [PR #1](https://github.com/theBstar/shipreel/pull/1): a small change, so 50 seconds. [Watch the full video](examples/pr-1/shipreel-pr-1.mp4) · [its scenes](examples/pr-1/scenes.mjs).*
+**[▶ Watch: shipreel in under two minutes](examples/explainer/shipreel.mp4)**: what it is, how to use it, how it works, and customising it. Made with shipreel itself ([its scenes](examples/explainer/scenes.mjs)).
+
+<details><summary>Chapters</summary>
+
+- `00:00` What it is
+- `00:11` What you get
+- `00:30` Install and use
+- `00:40` What the agent does
+- `00:54` How it works
+- `01:15` Customising it
+- `01:37` Get it
+
+</details>
 
 - **Free and local by default.** Narration uses your machine's voice; music is synthesized; rendering is headless Chrome and ffmpeg. No API keys, no uploads.
 - **Zero setup on a Mac.** Chrome in `/Applications` and macOS `say` are found automatically. Everything else is a line in `shipreel.yml`.

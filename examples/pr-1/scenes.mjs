@@ -1,4 +1,4 @@
-// The walkthrough shipreel made for its own PR #1, rendered with the skill as-is.
+// The scenes shipreel wrote for its own PR #1, rendered with the skill as-is.
 // Render it:  node plugins/shipreel/skills/shipreel/engine/build.mjs --scenes examples/pr-1/scenes.mjs
 import { title, header, svg, box, arrow, packet, label, card, code, C } from '../../plugins/shipreel/skills/shipreel/engine/lib.mjs';
 
