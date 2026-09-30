@@ -1,0 +1,16 @@
+# shipreel's own config: used for this repository's videos (see examples/).
+instructions: |
+  Audience: people deciding whether to use shipreel, and contributors reviewing a PR.
+  Show, don't list: one idea per scene.
+
+video:
+  optimal_seconds: 150
+
+pronounce:
+  shipreel: ship reel
+  theBstar: the B star
+  npx: N P X
+  yml: yammel
+  MP4: M P 4
+  ffmpeg: F F mpeg
+  Ffmpeg: F F mpeg

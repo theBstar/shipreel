@@ -14,7 +14,8 @@ Install: `npx skills add theBstar/shipreel`, or in Claude Code `/plugin marketpl
 
 ## Examples
 
-- [Its own PR #1](https://github.com/theBstar/shipreel/tree/main/examples/pr-1): a 50-second video with its scenes file
+- [The explainer](https://github.com/theBstar/shipreel/tree/main/examples/explainer): the README video (under two minutes: what shipreel is, how to use it, how it works, customising it) and its scenes file
+- [Its own PR #1](https://github.com/theBstar/shipreel/tree/main/examples/pr-1): the scenes shipreel wrote for its first pull request
 - [hello](https://github.com/theBstar/shipreel/tree/main/examples/hello): a minimal three-scene example
 
 ## Optional
