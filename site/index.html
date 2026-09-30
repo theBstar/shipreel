@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shipreel · narrated walkthrough videos for pull requests</title>
+<meta name="description" content="An agent skill that turns a pull request into a short narrated walkthrough video: diagrams, code, real app footage, captions and music. Free, local, zero setup on a Mac.">
+<meta property="og:title" content="shipreel: every pull request, a short film">
+<meta property="og:description" content="An agent skill that turns a pull request into a short narrated walkthrough video. Free, local, zero setup on a Mac.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="media/poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1020'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%235b9dff' stroke-width='4'/%3E%3Cpath d='M27 23 L42 32 L27 41 Z' fill='%2322d3ee'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#0b1020;--panel:#121a31;--panel2:#0d1426;--line:#26335a;--fg:#e8ecf5;--muted:#aeb7cb;--dim:#7c8aa8;
+  --cyan:#22d3ee;--blue:#5b9dff;--violet:#a78bfa;--green:#34d399;--amber:#fbbf24;--orange:#e8845c;
+  --sans:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Inter,'Helvetica Neue',Arial,sans-serif;
+  --mono:'SF Mono',Menlo,'JetBrains Mono',Consolas,'DejaVu Sans Mono',monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(1200px 700px at 80% -10%,#172244 0%,transparent 60%),radial-gradient(900px 600px at -10% 40%,#12203f 0%,transparent 55%)}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;color:var(--fg)}
+.brand svg{width:28px;height:28px}
+nav .links{display:flex;gap:22px;font-size:15px}nav .links a{color:var(--muted)}
+.hero{padding:48px 0 24px;text-align:center}
+.kick{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:600}
+h1{font-size:clamp(40px,7vw,78px);line-height:1.02;letter-spacing:-.035em;margin:14px 0 18px}
+.grad{background:linear-gradient(90deg,var(--cyan),var(--blue) 45%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(17px,2.2vw,21px);color:var(--muted);max-width:720px;margin:0 auto 28px}
+.cmd{display:inline-flex;align-items:center;gap:14px;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px 12px 18px;font:15px var(--mono);max-width:100%}
+.cmd code{white-space:nowrap;overflow:auto;color:#e9d7a6}.cmd code::before{content:'$ ';color:var(--dim)}
+button.copy{background:#1b2544;color:var(--fg);border:1px solid #2d3b66;border-radius:8px;padding:6px 12px;font:600 13px var(--sans);cursor:pointer}
+button.copy:hover{border-color:var(--blue)}
+.chips{margin-top:18px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.chip{padding:5px 12px;border-radius:999px;background:#1b2544;border:1px solid #2d3b66;font-size:13px;color:#d6dcea}
+.player{margin:40px auto 0;border-radius:18px;overflow:hidden;border:1.5px solid #2d3b66;box-shadow:0 40px 100px -30px #000c;background:#000;aspect-ratio:16/9}
+.player video{display:block;width:100%;height:100%}
+.chapters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0 0}
+.chapters button{background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:5px 12px;font:13px var(--sans);cursor:pointer}
+.chapters button:hover{color:var(--fg);border-color:var(--blue)}.chapters b{font-family:var(--mono);font-weight:500;color:var(--dim);margin-right:6px}
+section{padding:72px 0 8px}
+h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.02em;margin:8px 0 10px}
+.sub{color:var(--muted);max-width:720px;margin:0 0 30px}
+.grid{display:grid;gap:18px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr 1fr}
+.card{background:#121a31e6;border:1.5px solid var(--line);border-radius:16px;padding:22px 22px 20px}
+.card h3{margin:0 0 8px;font-size:19px}.card p{margin:0;color:#c4cbdb;font-size:15.5px}
+.c-blue{border-color:#5b9dff66}.c-blue h3{color:var(--blue)}.c-amber{border-color:#fbbf2466}.c-amber h3{color:var(--amber)}
+.c-green{border-color:#34d39966}.c-green h3{color:var(--green)}.c-violet{border-color:#a78bfa66}.c-violet h3{color:var(--violet)}
+.c-cyan{border-color:#22d3ee66}.c-cyan h3{color:var(--cyan)}.c-orange{border-color:#e8845c66}.c-orange h3{color:var(--orange)}
+.flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.step{flex:1 1 150px;border:1.5px solid;border-radius:14px;padding:16px;text-align:center;margin:6px;position:relative;background:#0f1629}
+.step b{display:block;font-size:17px;margin-bottom:4px}.step span{font-size:13.5px;color:var(--muted)}
+.step:not(:last-child)::after{content:'→';position:absolute;right:-17px;top:50%;transform:translateY(-50%);color:var(--dim)}
+pre{margin:0;background:var(--panel2);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;overflow:auto;font:14.5px/1.6 var(--mono);color:#c9d1e3}
+pre .k{color:#c9b8ff}pre .c{color:var(--dim)}pre .s{color:#e9d7a6}
+.tabs{display:flex;gap:6px;margin-bottom:10px}
+.tabs button{background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:7px 14px;font:600 14px var(--sans);cursor:pointer}
+.tabs button[aria-selected=true]{background:#1b2544;color:var(--fg);border-color:var(--blue)}
+.pane{display:none}.pane.on{display:block}
+.note{font-size:14.5px;color:var(--dim);margin-top:12px}
+footer{margin:80px 0 0;padding:28px 0 40px;border-top:1px solid var(--line);color:var(--dim);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media (max-width:900px){.g4{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.step:not(:last-child)::after{display:none}nav .links{display:none}}
+@media (max-width:520px){.g4{grid-template-columns:1fr}.cmd{font-size:13px}.cmd code{white-space:normal;word-break:break-all}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#121a31"/><circle cx="32" cy="32" r="18" fill="none" stroke="#5b9dff" stroke-width="4"/><path d="M27 23 L42 32 L27 41 Z" fill="#22d3ee"/></svg>shipreel</a>
+    <div class="links"><a href="#how">How it works</a><a href="#install">Install</a><a href="#customise">Customise</a><a href="https://github.com/theBstar/shipreel">GitHub</a></div>
+  </nav>
+
+  <header class="hero">
+    <div class="kick">An agent skill · MIT · free and local</div>
+    <h1>Every pull request,<br><span class="grad">a short film</span></h1>
+    <p class="lede">shipreel turns a pull request into a narrated walkthrough video: diagrams, the code that matters, and the real app in action, in about two and a half minutes. Reviewers watch the change instead of reverse-engineering the diff.</p>
+    <div class="cmd"><code id="c-main">npx skills add theBstar/shipreel</code><button class="copy" data-copy="c-main">Copy</button></div>
+    <div class="chips"><span class="chip">Claude Code</span><span class="chip">Codex</span><span class="chip">Cursor</span><span class="chip">any skills agent</span></div>
+    <div class="player"><video id="v" controls preload="metadata" poster="media/poster.jpg" src="media/shipreel.mp4"></video></div>
+    <div class="chapters" id="ch"></div>
+  </header>
+
+  <section id="what">
+    <div class="kick">What you get</div>
+    <h2>The change, explained</h2>
+    <p class="sub">Each video says what changed and why, in an order that builds understanding, and ends with where a reviewer should look.</p>
+    <div class="grid g4">
+      <div class="card c-blue"><h3>Diagrams</h3><p>Boxes, arrows and moving packets for how the pieces connect.</p></div>
+      <div class="card c-amber"><h3>The code</h3><p>The lines that matter, as a diff, never the whole file.</p></div>
+      <div class="card c-green"><h3>Real footage</h3><p>For UI changes it signs in to your app and records the actual flow.</p></div>
+      <div class="card c-violet"><h3>Finish</h3><p>Captions, crossfade cuts and a soft music bed, ducked under the voice.</p></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="kick">How it works</div>
+    <h2>From diff to MP4</h2>
+    <p class="sub">Ask your agent to "make a shipreel for PR 123". It follows the skill step by step, and shows you still frames before it renders.</p>
+    <div class="flow">
+      <div class="step" style="border-color:#22d3ee"><b>Check</b><span>voice, browser, ffmpeg</span></div>
+      <div class="step" style="border-color:#5b9dff"><b>Read</b><span>the PR and its diff</span></div>
+      <div class="step" style="border-color:#a78bfa"><b>Plan</b><span>a few scenes, one idea each</span></div>
+      <div class="step" style="border-color:#fbbf24"><b>Write</b><span>scenes and narration</span></div>
+      <div class="step" style="border-color:#e8845c"><b>Check</b><span>still frames for layout</span></div>
+      <div class="step" style="border-color:#34d399"><b>Render</b><span>an MP4 under 10 MB</span></div>
+    </div>
+    <div class="grid g3" style="margin-top:22px">
+      <div class="card c-cyan"><h3>Scenes are HTML</h3><p>Plain HTML on a 1920×1080 stage, with one narration line per beat. Helpers draw boxes, arrows, cards, code and screen recordings.</p></div>
+      <div class="card c-violet"><h3>Every frame, in step</h3><p>A voice adapter speaks each line; headless Chrome renders every frame to match it, deterministically.</p></div>
+      <div class="card c-green"><h3>Finished by ffmpeg</h3><p>Crossfades between scenes, an ambient pad ducked under the voice, loudness normalised, under GitHub's 10 MB limit.</p></div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="kick">Install</div>
+    <h2>One line</h2>
+    <p class="sub">Needs Node 18+, ffmpeg and Chrome (or Chromium, Edge, Brave). On a Mac with those, there is nothing else to set up.</p>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-pane="p-skills">Any agent</button>
+      <button role="tab" aria-selected="false" data-pane="p-claude">Claude Code plugin</button>
+      <button role="tab" aria-selected="false" data-pane="p-hand">By hand</button>
+    </div>
+    <div class="pane on" id="p-skills"><pre><span class="c"># Claude Code, Codex, Cursor and any agent that reads SKILL.md skills</span>
+npx skills add theBstar/shipreel</pre></div>
+    <div class="pane" id="p-claude"><pre><span class="c"># inside Claude Code</span>
+/plugin marketplace add theBstar/shipreel
+/plugin install shipreel@shipreel</pre></div>
+    <div class="pane" id="p-hand"><pre><span class="c"># copy the skill into your agent's skills directory</span>
+git clone https://github.com/theBstar/shipreel
+cp -r shipreel/plugins/shipreel/skills/shipreel ~/.claude/skills/</pre></div>
+    <p class="note">Then ask your agent: <b>"make a shipreel for PR 123"</b>. The video lands in <code>.shipreel/</code>, never in your repository's history; you drop it into the PR.</p>
+  </section>
+
+  <section id="customise">
+    <div class="kick">Customise</div>
+    <h2>One optional file</h2>
+    <p class="sub">Put <code>shipreel.yml</code> at your repository root. Every key is optional; the defaults need nothing on a Mac.</p>
+    <div class="grid g2">
+<pre><span class="k">instructions</span>: |
+  <span class="s">Audience: reviewers. Lead with the user-facing change.</span>
+<span class="k">video</span>:
+  <span class="k">optimal_seconds</span>: 150   <span class="c"># a guideline, not a wall</span>
+<span class="k">voice</span>:
+  <span class="k">engine</span>: piper          <span class="c"># say · piper · command</span>
+<span class="k">app</span>:
+  <span class="k">url</span>: http://localhost:3000
+  <span class="k">credentials</span>:
+    <span class="k">password</span>: { <span class="k">env</span>: DEMO_PASSWORD }
+<span class="k">pronounce</span>:
+  <span class="k">kubectl</span>: cube control</pre>
+      <div class="grid" style="align-content:start">
+        <div class="card c-amber"><h3>A brief and a length</h3><p>Tell every video who it's for. Aim for 150 seconds by default: shorter for small changes, longer only when needed.</p></div>
+        <div class="card c-blue"><h3>Adapters</h3><p>Voice (macOS say, Piper, or any command), browser and fonts are all swappable. Found automatically on a Mac.</p></div>
+        <div class="card c-green"><h3>Your app, safely</h3><p>Sign-in steps and credentials from the environment or a git-ignored file. A password in the config is refused.</p></div>
+      </div>
+    </div>
+    <p class="note">Every key is documented in <a href="https://github.com/theBstar/shipreel/blob/main/plugins/shipreel/skills/shipreel/references/config.md">references/config.md</a>.</p>
+  </section>
+
+  <section id="principles">
+    <div class="kick">By design</div>
+    <h2>Honest, cheap, clean</h2>
+    <div class="grid g3">
+      <div class="card c-blue"><h3>Facts from the code</h3><p>Narration describes the current behaviour, never the branch's history, and ends with what a reviewer should check.</p></div>
+      <div class="card c-amber"><h3>Asks before it spends</h3><p>Local and free by default. Any paid step, like a cloud voice, is estimated and asked about first.</p></div>
+      <div class="card c-green"><h3>Your repo stays clean</h3><p>No committed videos, no media branches, no uploads. Credentials are never printed.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>shipreel · MIT · made with shipreel</span>
+    <span><a href="https://github.com/theBstar/shipreel">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="https://github.com/theBstar/shipreel/releases">Releases</a></span>
+  </footer>
+</div>
+<script>
+// Chapters: the same as the video's own (examples/explainer).
+const CH = [[0,'What it is'],[11,'What you get'],[30,'Install and use'],[40,'What the agent does'],[54,'How it works'],[75,'Customising it'],[97,'Get it']];
+const v = document.getElementById('v'), ch = document.getElementById('ch');
+for (const [t, name] of CH) {
+  const b = document.createElement('button');
+  b.innerHTML = `<b>${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}</b>${name}`;
+  b.onclick = () => { v.currentTime = t; v.play(); };
+  ch.appendChild(b);
+}
+document.querySelectorAll('button.copy').forEach(b => b.onclick = async () => {
+  try { await navigator.clipboard.writeText(document.getElementById(b.dataset.copy).textContent); b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy', 1500); } catch {}
+});
+document.querySelectorAll('[role=tab]').forEach(t => t.onclick = () => {
+  document.querySelectorAll('[role=tab]').forEach(x => x.setAttribute('aria-selected', x === t));
+  document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', p.id === t.dataset.pane));
+});
+</script>
+</body>
+</html>
