@@ -4,6 +4,10 @@
 
 Reviewers watch the change instead of reverse-engineering it.
 
+[![The walkthrough shipreel made for its own PR #1](examples/pr-1/preview.gif)](examples/pr-1/shipreel-pr-1.mp4)
+
+*The video shipreel made for its own [PR #1](https://github.com/theBstar/shipreel/pull/1): a small change, so 50 seconds. [Watch the full video](examples/pr-1/shipreel-pr-1.mp4) · [its scenes](examples/pr-1/scenes.mjs).*
+
 - **Free and local by default.** Narration uses your machine's voice; music is synthesized; rendering is headless Chrome and ffmpeg. No API keys, no uploads.
 - **Zero setup on a Mac.** Chrome in `/Applications` and macOS `say` are found automatically. Everything else is a line in `shipreel.yml`.
 - **Real footage.** For UI changes it signs in to your app (credentials from env vars, never printed) and records the actual flow.
