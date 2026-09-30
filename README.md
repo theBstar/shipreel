@@ -6,7 +6,7 @@ Reviewers watch the change instead of reverse-engineering it.
 
 [![shipreel in under two minutes: what it is, how to use it, how it works and how to customise it](examples/explainer/preview.gif)](examples/explainer/shipreel.mp4)
 
-**[▶ Watch: shipreel in under two minutes](examples/explainer/shipreel.mp4)**: what it is, how to use it, how it works, and customising it. Made with shipreel itself ([its scenes](examples/explainer/scenes.mjs)).
+**[▶ Watch it on the site](https://www.thebstar.com/shipreel/)** (or [download the video](examples/explainer/shipreel.mp4)): what it is, how to use it, how it works, and customising it. Made with shipreel itself ([its scenes](examples/explainer/scenes.mjs)).
 
 <details><summary>Chapters</summary>
 

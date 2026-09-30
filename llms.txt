@@ -2,6 +2,8 @@
 
 > An agent skill that turns a GitHub pull request into a short narrated walkthrough video (about 150 seconds): animated diagrams, code panels, optional screen recordings of the real app, captions, crossfade cuts and an ambient music bed. Free and local by default (macOS `say` or Piper for the voice, headless Chrome and ffmpeg for rendering); zero setup on a Mac. Works with Claude Code, Codex, Cursor and any agent that reads SKILL.md skills.
 
+Site: https://www.thebstar.com/shipreel/
+
 Install: `npx skills add theBstar/shipreel`, or in Claude Code `/plugin marketplace add theBstar/shipreel` then `/plugin install shipreel@shipreel`. Then ask the agent to "make a shipreel for PR 123".
 
 ## Skill

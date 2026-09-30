@@ -1,0 +1,41 @@
+name: pages
+
+# Publishes site/ to GitHub Pages. The explainer video is copied in at deploy
+# time, so the repository keeps a single copy of it (examples/explainer/).
+on:
+  push:
+    branches: [main]
+    paths: ['site/**', 'examples/explainer/**', 'llms.txt', '.github/workflows/pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble the site
+        run: |
+          mkdir -p _site/media
+          cp -r site/. _site/
+          cp llms.txt _site/
+          cp examples/explainer/shipreel.mp4 _site/media/
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          ffmpeg -v error -ss 3 -i _site/media/shipreel.mp4 -frames:v 1 -vf scale=1280:-1 -q:v 3 _site/media/poster.jpg
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4
