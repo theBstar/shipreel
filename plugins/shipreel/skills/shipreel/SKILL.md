@@ -17,7 +17,7 @@ Make a video a reviewer can watch instead of reading the diff cold: what changed
 - **Credentials are never printed, echoed, logged or pasted into a file you write.** They are read by the engine from `app.credentials` (env or a git-ignored file).
 - **Ask before anything that costs money or touches shared state:** a paid voice, running an app flow that calls paid APIs, editing a PR description, pushing. Give an estimate first.
 - **Say so before recording real customer data.** If the app shows real data, tell the user what will be on screen and let them choose (aggregate data, a demo account, or blur).
-- **Never commit the video or `.shipreel/`.** Deliver the file path.
+- **Never put media in the user's repository**: no committed video or `.shipreel/`, no media branch, no release asset. Deliver the file path; the user attaches it where they want it.
 
 ## 1. Set up (once per machine)
 
