@@ -1,5 +1,13 @@
 # shipreel
 
+<a href="https://skilld.dev/gh/thebstar/shipreel">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://skilld.dev/b/thebstar/shipreel?theme=dark">
+    <source media="(prefers-color-scheme: light)" srcset="https://skilld.dev/b/thebstar/shipreel?theme=light">
+    <img alt="Skill repository on skilld.dev" src="https://skilld.dev/b/thebstar/shipreel?theme=light">
+  </picture>
+</a>
+
 **Turn a pull request into a short narrated walkthrough video.** An agent skill: your coding agent reads the diff, writes the story, draws the diagrams, records the real app if the change has a UI, and renders a compact MP4, about two and a half minutes by default, with captions, crossfade cuts and an ambient music bed.
 
 Reviewers watch the change instead of reverse-engineering it.
